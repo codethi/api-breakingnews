@@ -111,6 +111,28 @@ const searchPostController = async (req, res) => {
   });
 };
 
+const findPostByIdController = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const post = await postService.findPostByIdService(id);
+
+    return res.send({
+      id: post._id,
+      title: post.title,
+      banner: post.banner,
+      text: post.text,
+      likes: post.likes.length,
+      comments: post.comments,
+      name: post.user.name,
+      username: post.user.username,
+      avatar: post.user.avatar,
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 const updatePostController = async (req, res) => {
   try {
     const { title, banner, text } = req.body;
@@ -150,7 +172,7 @@ const deletePostController = async (req, res) => {
       });
     }
 
-    await postService.deletePostService(id)
+    await postService.deletePostService(id);
 
     return res.send({ message: "Post deleted successfully" });
   } catch (err) {
@@ -194,6 +216,7 @@ module.exports = {
   createPostController,
   findAllPostsController,
   searchPostController,
+  findPostByIdController,
   updatePostController,
   deletePostController,
   likePostController,

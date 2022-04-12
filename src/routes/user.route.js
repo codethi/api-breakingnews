@@ -11,5 +11,11 @@ router.get(
   authMiddleware,
   userController.findUserByIdController
 );
+router.patch(
+  "/update/:id",
+  validId,
+  authMiddleware,
+  userController.updateUserController
+);
 
 module.exports = router;

@@ -8,9 +8,27 @@ const findAllUserService = () => User.find();
 
 const findByIdUserService = (idUser) => User.findById(idUser);
 
+const updateUserService = (id, name, username, email, password, avatar) =>
+  User.findOneAndUpdate(
+    {
+      _id: id,
+    },
+    {
+      name,
+      username,
+      email,
+      password,
+      avatar,
+    },
+    {
+      rawResult: true,
+    }
+  );
+
 module.exports = {
   findByEmailUserService,
   createUserSevice,
   findAllUserService,
   findByIdUserService,
+  updateUserService,
 };

@@ -7,6 +7,12 @@ const { validId } = require("../middlewares/global.middleware");
 router.post("/create", authMiddleware, postController.createPostController);
 router.get("/", authMiddleware, postController.findAllPostsController);
 router.get("/search", authMiddleware, postController.searchPostController);
+router.get(
+  "/:id",
+  validId,
+  authMiddleware,
+  postController.findPostByIdController
+);
 router.patch(
   "/update/:id",
   validId,

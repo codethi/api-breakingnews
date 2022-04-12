@@ -1,5 +1,6 @@
 const userService = require("../services/user.service");
 const authService = require("../services/auth.service");
+const bcrypt = require("bcryptjs");
 
 const createUserController = async (req, res) => {
   const { name, username, email, password, avatar } = req.body;
@@ -67,8 +68,47 @@ const findUserByIdController = async (req, res) => {
   res.send(user);
 };
 
+const updateUserController = async (req, res) => {
+  try {
+    let { name, username, email, password, avatar } = req.body;
+    const { id } = req.params;
+
+    if (!name && !username && !email && !password && !avatar) {
+      res.status(400).send({
+        message: "Submit at least one field to update the post",
+      });
+    }
+
+    const user = await userService.findByIdUserService(id);
+
+    if (user._id != req.userId) {
+      return res.status(400).send({
+        message: "You cannot update this user",
+      });
+    }
+
+    if (password) {
+      password = await bcrypt.hash(password, 10);
+    }
+
+    await userService.updateUserService(
+      id,
+      name,
+      username,
+      email,
+      password,
+      avatar
+    );
+
+    return res.send({ message: "User successfully updated!" });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 module.exports = {
   createUserController,
   findAllUserController,
   findUserByIdController,
+  updateUserController,
 };
