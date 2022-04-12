@@ -32,7 +32,7 @@ const likesService = (id, userId) =>
   );
 
 const commetsService = (id, message, userId) =>
-  Tweet.findOneAndUpdate(
+  Post.findOneAndUpdate(
     {
       _id: id,
     },

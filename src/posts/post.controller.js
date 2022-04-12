@@ -57,7 +57,7 @@ const findAllPostsController = async (req, res) => {
         ? `${currentUrl}?limit=${limit}&offset=${previous}`
         : null;
 
-    if (tweets.length === 0) {
+    if (posts.length === 0) {
       return res.status(400).send({ message: "There are no posts" });
     }
 
@@ -93,7 +93,7 @@ const searchPostController = async (req, res) => {
   if (foundPosts.length === 0) {
     return res
       .status(400)
-      .send({ message: "There are no tweets with this title" });
+      .send({ message: "There are no posts with this title" });
   }
 
   return res.send({
@@ -132,10 +132,14 @@ const commentPostController = async (req, res) => {
   const { message } = req.body;
   const userId = req.userId;
 
+  if(!message) {
+    return res.status(400).send({ message: "Write a message to comment" });
+  }
+
   await postService.commetsService(id,message, userId);
 
   return res.send({
-    message: "Comentario realizado com sucesso!",
+    message: "Comment successfully completed!",
   });
 };
 
