@@ -127,6 +127,58 @@
         }
       }
     },
+    "/user/update/{id}": {
+      "patch": {
+        "summary": "Update user by id",
+        "description": "Route responsible for editing the user by id",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "User ID",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "Users": {
+                  "value": {
+                    "name": "Thiago Lima"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/auth/login": {
       "post": {
         "summary": "Login to Breaking News",
@@ -285,12 +337,57 @@
         }
       }
     },
-    "/post/upadate": {
+    "/post/{id}": {
+      "patch": {
+        "summary": "Search post by id",
+        "description": "Route responsible for fetching post by id",
+        "tags": ["Post"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "Post ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schemma": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/post/upadate/{id}": {
       "patch": {
         "summary": "Update a post",
         "description": "Route responsible for updating a Post",
         "tags": ["Post"],
         "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "Post ID",
+            "required": true
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -330,12 +427,21 @@
         }
       }
     },
-    "/post/delete": {
+    "/post/delete/{id}": {
       "delete": {
         "summary": "Delete a post",
         "description": "Route responsible for deleting a Post",
         "tags": ["Post"],
         "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "string",
+            "description": "Post ID",
+            "required": true
+          }
+        ],
         "responses": {
           "401": {
             "description": "Unauthorized"
@@ -379,7 +485,7 @@
     },
     "/post/{id}/comment": {
       "patch": {
-        "summary": "comment on a post",
+        "summary": "Comment on a post",
         "description": "Route responsible for commenting on a post",
         "tags": ["Post"],
         "security": [{ "bearerAuth": [] }],
@@ -392,6 +498,22 @@
             "required": true
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comment"
+              },
+              "examples": {
+                "Comment": {
+                  "value": {
+                    "message": "Comentário legal"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "401": {
             "description": "Unauthorized"
@@ -458,6 +580,14 @@
           },
           "createdAt": {
             "type": "date"
+          }
+        }
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
           }
         }
       }
