@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3001",
+      "url": "http://localhost:3000",
       "description": "Local"
     },
     {
@@ -211,7 +211,7 @@
         }
       }
     },
-    "/post/create": {
+    "/posts/create": {
       "post": {
         "summary": "Create a new post",
         "description": "Route responsible for creating a new Post",
@@ -259,7 +259,7 @@
         }
       }
     },
-    "/post": {
+    "/posts": {
       "get": {
         "summary": "Search all posts",
         "description": "Route responsible for fetching all posts",
@@ -300,7 +300,7 @@
         }
       }
     },
-    "/post/search": {
+    "/posts/search": {
       "get": {
         "summary": "Search posts by title",
         "description": "Route responsible for fetching the posts that match the title sent via query params",
@@ -337,7 +337,7 @@
         }
       }
     },
-    "/post/{id}": {
+    "/posts/{id}": {
       "patch": {
         "summary": "Search post by id",
         "description": "Route responsible for fetching post by id",
@@ -373,7 +373,7 @@
         }
       }
     },
-    "/post/upadate/{id}": {
+    "/posts/upadate/{id}": {
       "patch": {
         "summary": "Update a post",
         "description": "Route responsible for updating a Post",
@@ -427,7 +427,7 @@
         }
       }
     },
-    "/post/delete/{id}": {
+    "/posts/delete/{id}": {
       "delete": {
         "summary": "Delete a post",
         "description": "Route responsible for deleting a Post",
@@ -455,7 +455,7 @@
         }
       }
     },
-    "/post/{id}/like": {
+    "/posts/{id}/like": {
       "patch": {
         "summary": "Like a post",
         "description": "Route responsible for liking a post",
@@ -483,7 +483,7 @@
         }
       }
     },
-    "/post/{id}/comment": {
+    "/posts/{id}/comment": {
       "patch": {
         "summary": "Comment on a post",
         "description": "Route responsible for commenting on a post",

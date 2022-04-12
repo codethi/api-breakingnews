@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/user", userRoute);
 app.use("/auth", authRoute);
-app.use("/post", postRoute);
+app.use("/posts", postRoute);
 app.use("/doc", swaggerRoute);
 
 app.listen(port, () => console.log(`Server running on port: ${port}`));
