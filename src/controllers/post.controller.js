@@ -1,4 +1,4 @@
-const postService = require("./post.service");
+const postService = require("../services/post.service");
 
 const createPostController = async (req, res) => {
   try {
@@ -111,6 +111,35 @@ const searchPostController = async (req, res) => {
   });
 };
 
+const updatePostController = async (req, res) => {
+  try {
+    const { title, banner, text } = req.body;
+    const { id } = req.params;
+
+    if (!title && !banner && !text) {
+      res.status(400).send({
+        message: "Submit at least one field to update the post",
+      });
+    }
+
+    const post = await postService.findPostByIdService(id);
+
+    if (post.user._id != req.userId) {
+      return res.status(400).send({
+        message: "You didn't create this post",
+      });
+    }
+
+    await postService.updatePostService(id, title, banner, text);
+
+    return res.send({ message: "Post successfully updated!" });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+const deletePostController = async (req, res) => {};
+
 const likePostController = async (req, res) => {
   const { id } = req.params;
 
@@ -132,11 +161,11 @@ const commentPostController = async (req, res) => {
   const { message } = req.body;
   const userId = req.userId;
 
-  if(!message) {
+  if (!message) {
     return res.status(400).send({ message: "Write a message to comment" });
   }
 
-  await postService.commetsService(id,message, userId);
+  await postService.commetsService(id, message, userId);
 
   return res.send({
     message: "Comment successfully completed!",
@@ -147,6 +176,8 @@ module.exports = {
   createPostController,
   findAllPostsController,
   searchPostController,
+  updatePostController,
+  deletePostController,
   likePostController,
   commentPostController,
 };

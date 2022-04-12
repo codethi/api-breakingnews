@@ -1,5 +1,5 @@
-const userService = require("./user.service");
-const authService = require("../auth/auth.service");
+const userService = require("../services/user.service");
+const authService = require("../services/auth.service");
 
 const createUserController = async (req, res) => {
   const { name, username, email, password, avatar } = req.body;
@@ -62,7 +62,7 @@ const findUserByIdController = async (req, res) => {
     });
   }
 
-  const user = await userService.findByIdService(id);
+  const user = await userService.findByIdUserService(id);
 
   res.send(user);
 };

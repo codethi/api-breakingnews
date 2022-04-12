@@ -1,4 +1,4 @@
-const User = require("./User");
+const User = require("../models/User");
 
 const findByEmailUserService = (email) => User.findOne({ email: email });
 

@@ -1,6 +1,6 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { findByIdUserService } = require("../user/user.service");
+const { findByIdUserService } = require("../services/user.service");
 
 module.exports = (req, res, next) => {
   const authHeader = req.headers.authorization;
