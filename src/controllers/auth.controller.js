@@ -19,7 +19,7 @@ const loginController = async (req, res) => {
 
     const token = authService.generateToken(user.id);
 
-    res.send(token);
+    res.send({token});
 }
 
 module.exports = {loginController}

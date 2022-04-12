@@ -32,6 +32,8 @@ const updatePostService = (id, title, banner, text) =>
     }
   );
 
+const deletePostService = (id) => Post.findOneAndDelete({_id: id});
+
 const likesService = (id, userId) =>
   Post.findOneAndUpdate(
     {
@@ -69,6 +71,7 @@ module.exports = {
   findPostByIdService,
   searchPostService,
   updatePostService,
+  deletePostService,
   likesService,
   commetsService,
   countPosts,

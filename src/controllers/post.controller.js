@@ -138,7 +138,25 @@ const updatePostController = async (req, res) => {
   }
 };
 
-const deletePostController = async (req, res) => {};
+const deletePostController = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const post = await postService.findPostByIdService(id);
+
+    if (post.user._id != req.userId) {
+      return res.status(400).send({
+        message: "You didn't create this post",
+      });
+    }
+
+    await postService.deletePostService(id)
+
+    return res.send({ message: "Post deleted successfully" });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
 
 const likePostController = async (req, res) => {
   const { id } = req.params;
