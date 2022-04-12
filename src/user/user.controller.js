@@ -54,4 +54,21 @@ const findAllUserController = async (req, res) => {
   res.send(users);
 };
 
-module.exports = { createUserController, findAllUserController };
+const findUserByIdController = async (req, res) => {
+  const id = req.params.id;
+  if (!id) {
+    return res.status(400).send({
+      message: "Send an id in the parameters to search for the user",
+    });
+  }
+
+  const user = await userService.findByIdService(id);
+
+  res.send(user);
+};
+
+module.exports = {
+  createUserController,
+  findAllUserController,
+  findUserByIdController,
+};
