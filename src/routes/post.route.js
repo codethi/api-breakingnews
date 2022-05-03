@@ -5,8 +5,8 @@ const authMiddleware = require("../middlewares/auth.middleware");
 const { validId } = require("../middlewares/global.middleware");
 
 router.post("/create", authMiddleware, postController.createPostController);
-router.get("/", authMiddleware, postController.findAllPostsController);
-router.get("/search", authMiddleware, postController.searchPostController);
+router.get("/", postController.findAllPostsController);
+router.get("/search", postController.searchPostController);
 router.get(
   "/:id",
   validId,
