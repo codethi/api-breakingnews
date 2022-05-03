@@ -264,7 +264,6 @@
         "summary": "Search all posts",
         "description": "Route responsible for fetching all posts",
         "tags": ["Post"],
-        "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
             "in": "query",
@@ -305,7 +304,6 @@
         "summary": "Search posts by title",
         "description": "Route responsible for fetching the posts that match the title sent via query params",
         "tags": ["Post"],
-        "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
             "in": "query",
