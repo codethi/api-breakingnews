@@ -332,7 +332,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "message",
+            "name": "title",
             "type": "string",
             "required": true
           }
