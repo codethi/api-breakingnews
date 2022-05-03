@@ -10,6 +10,11 @@
   },
   "servers": [
     {
+      "url": "https://api-breakingnews.onrender.com",
+      "description": "Render"
+    },
+    
+    {
       "url": "http://localhost:3000",
       "description": "Local"
     },
