@@ -85,6 +85,26 @@ const findAllPostsController = async (req, res) => {
   }
 };
 
+const topNewsController = async (req, res) => {
+  const post = await postService.topNewsService();
+  if (!post) {
+    return res.status(400).send({ message: "There is no registered post" });
+  }
+  return res.send({
+    post: {
+      id: post._id,
+      title: post.title,
+      banner: post.banner,
+      text: post.text,
+      likes: post.likes.length,
+      comments: post.comments,
+      name: post.user.name,
+      username: post.user.username,
+      avatar: post.user.avatar,
+    },
+  });
+};
+
 const searchPostController = async (req, res) => {
   const { title } = req.query;
 
@@ -215,10 +235,11 @@ const commentPostController = async (req, res) => {
 module.exports = {
   createPostController,
   findAllPostsController,
+  topNewsController,
   searchPostController,
   findPostByIdController,
   updatePostController,
   deletePostController,
   likePostController,
-  commentPostController,
+  commentPostController  
 };

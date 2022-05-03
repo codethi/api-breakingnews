@@ -6,6 +6,8 @@ const createPostService = (title, banner, text, userId) =>
 const findAllPostsService = (offset, limit) =>
   Post.find().sort({ _id: -1 }).skip(offset).limit(limit).populate("user");
 
+const topNewsService = () => Post.findOne().sort({ _id: -1 }).populate("user");
+
 const findPostByIdService = (id) => Post.findById(id).populate("user");
 
 const countPosts = () => Post.countDocuments();
@@ -32,7 +34,7 @@ const updatePostService = (id, title, banner, text) =>
     }
   );
 
-const deletePostService = (id) => Post.findOneAndDelete({_id: id});
+const deletePostService = (id) => Post.findOneAndDelete({ _id: id });
 
 const likesService = (id, userId) =>
   Post.findOneAndUpdate(
@@ -68,6 +70,7 @@ const commetsService = (id, message, userId) =>
 module.exports = {
   createPostService,
   findAllPostsService,
+  topNewsService,
   findPostByIdService,
   searchPostService,
   updatePostService,

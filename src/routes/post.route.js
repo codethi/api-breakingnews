@@ -6,6 +6,7 @@ const { validId } = require("../middlewares/global.middleware");
 
 router.post("/create", authMiddleware, postController.createPostController);
 router.get("/", postController.findAllPostsController);
+router.get("/top", postController.topNewsController);
 router.get("/search", postController.searchPostController);
 router.get(
   "/:id",
