@@ -34,7 +34,7 @@ const findAllPostsController = async (req, res) => {
     offset = Number(offset);
 
     if (!limit) {
-      limit = 9;
+      limit = 5;
     }
 
     if (!offset) {
