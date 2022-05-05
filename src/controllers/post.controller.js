@@ -34,7 +34,7 @@ const findAllPostsController = async (req, res) => {
     offset = Number(offset);
 
     if (!limit) {
-      limit = 6;
+      limit = 8;
     }
 
     if (!offset) {
@@ -60,6 +60,8 @@ const findAllPostsController = async (req, res) => {
     if (posts.length === 0) {
       return res.status(400).send({ message: "There are no posts" });
     }
+
+    posts.shift(); // remove primeiro elemento da lista
 
     return res.send({
       nextUrl,
@@ -241,5 +243,5 @@ module.exports = {
   updatePostController,
   deletePostController,
   likePostController,
-  commentPostController  
+  commentPostController,
 };
