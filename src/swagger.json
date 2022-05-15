@@ -96,7 +96,7 @@
         }
       }
     },
-    "/user/{id}": {
+    "/user/findById/{id}": {
       "get": {
         "summary": "Search user by id",
         "description": "Route responsible for searching for user by id",
