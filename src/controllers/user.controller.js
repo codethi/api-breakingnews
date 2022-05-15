@@ -56,7 +56,7 @@ const findAllUserController = async (req, res) => {
 };
 
 const findUserByIdController = async (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id || req.userId;
   if (!id) {
     return res.status(400).send({
       message: "Send an id in the parameters to search for the user",
