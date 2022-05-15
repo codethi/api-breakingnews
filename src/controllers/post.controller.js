@@ -155,6 +155,30 @@ const findPostByIdController = async (req, res) => {
   }
 };
 
+const findPostsByUserIdController = async (req, res) => {
+  try {
+    const id = req.userId;
+
+    const posts = await postService.findPostsByUserIdService(id);
+
+    return res.send({
+      postsByUser: posts.map((post) => ({
+        id: post._id,
+        title: post.title,
+        banner: post.banner,
+        text: post.text,
+        likes: post.likes.length,
+        comments: post.comments,
+        name: post.user.name,
+        username: post.user.username,
+        avatar: post.user.avatar,
+      })),
+    });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 const updatePostController = async (req, res) => {
   try {
     const { title, banner, text } = req.body;
@@ -240,6 +264,7 @@ module.exports = {
   topNewsController,
   searchPostController,
   findPostByIdController,
+  findPostsByUserIdController,
   updatePostController,
   deletePostController,
   likePostController,

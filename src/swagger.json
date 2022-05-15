@@ -13,7 +13,7 @@
       "url": "https://api-breakingnews.onrender.com",
       "description": "Render"
     },
-    
+
     {
       "url": "http://localhost:3000",
       "description": "Local"
@@ -357,7 +357,7 @@
         }
       }
     },
-    "/posts/{id}": {
+    "/posts/byIdPost/{id}": {
       "patch": {
         "summary": "Search post by id",
         "description": "Route responsible for fetching post by id",
@@ -386,6 +386,34 @@
                 "schemma": {
                   "type": "object",
                   "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts/byUserId": {
+      "get": {
+        "summary": "Search posts by use id",
+        "description": "Route responsible for fetching posts by use id",
+        "tags": ["Post"],
+        "responses": {
+          "400": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Post"
+                  }
                 }
               }
             }

@@ -19,6 +19,14 @@ const searchPostService = (title) =>
     .sort({ _id: -1 })
     .populate("user");
 
+const findPostsByUserIdService = (id) => {
+  return Post.find({
+    user: id,
+  })
+    .sort({ _id: -1 })
+    .populate("user");
+};
+
 const updatePostService = (id, title, banner, text) =>
   Post.findOneAndUpdate(
     {
@@ -73,6 +81,7 @@ module.exports = {
   topNewsService,
   findPostByIdService,
   searchPostService,
+  findPostsByUserIdService,
   updatePostService,
   deletePostService,
   likesService,

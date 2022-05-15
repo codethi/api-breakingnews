@@ -9,10 +9,16 @@ router.get("/", postController.findAllPostsController);
 router.get("/top", postController.topNewsController);
 router.get("/search", postController.searchPostController);
 router.get(
-  "/:id",
+  "/byIdPost/:id",
   validId,
   authMiddleware,
   postController.findPostByIdController
+);
+router.get(
+  "/byUserId",
+  authMiddleware,
+  validId,
+  postController.findPostsByUserIdController
 );
 router.patch(
   "/update/:id",
