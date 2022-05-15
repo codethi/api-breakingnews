@@ -6,9 +6,9 @@ const { validId } = require("../middlewares/global.middleware");
 router.post("/create", userController.createUserController);
 router.get("/", authMiddleware, userController.findAllUserController);
 router.get(
-  "/findById/:id",
-  validId,
+  "/findById/:id?",
   authMiddleware,
+  validId,
   userController.findUserByIdController
 );
 router.patch(

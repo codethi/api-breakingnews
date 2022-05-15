@@ -56,14 +56,20 @@ const findAllUserController = async (req, res) => {
 };
 
 const findUserByIdController = async (req, res) => {
-  const id = req.params.id || req.userId;
-  if (!id) {
+  let idParam;
+  if (!req.params.id) {
+    req.params.id = req.userId;
+    idParam = req.params.id;
+  } else {
+    idParam = req.params.id;
+  }
+  if (!idParam) {
     return res.status(400).send({
       message: "Send an id in the parameters to search for the user",
     });
   }
 
-  const user = await userService.findByIdUserService(id);
+  const user = await userService.findByIdUserService(idParam);
 
   res.send(user);
 };
