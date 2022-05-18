@@ -22,9 +22,15 @@ module.exports = (req, res, next) => {
   }
 
   jwt.verify(token, process.env.SECRET, async (err, decoded) => {
+    
+    if(err) {
+      console.error(err);
+      return res.status(401).send({ message: "Invalid token!" });
+    }
+
     const user = await findByIdUserService(decoded.id);
 
-    if (err || !user || !user.id) {
+    if (!user || !user.id) {
       return res.status(401).send({ message: "Invalid token!" });
     }
 
