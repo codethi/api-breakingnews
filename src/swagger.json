@@ -42,7 +42,8 @@
                     "username": "cacode",
                     "email": "clima@gmail.com",
                     "password": "12345",
-                    "avatar": "https://i.imgur.com/Ry1cb5M.png"
+                    "avatar": "https://i.imgur.com/Ry1cb5M.png",
+                    "background": "https://images.wallpapersden.com/image/download/triangle-8k-blue-pattern_bGZlbmiUmZqaraWkpJRmbmdlrWZlbWU.jpg"
                   }
                 }
               }
@@ -601,6 +602,9 @@
             "type": "string"
           },
           "avatar": {
+            "type": "string"
+          },
+          "background": {
             "type": "string"
           }
         }
