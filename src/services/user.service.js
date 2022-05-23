@@ -8,7 +8,15 @@ const findAllUserService = () => User.find();
 
 const findByIdUserService = (idUser) => User.findById(idUser);
 
-const updateUserService = (id, name, username, email, password, avatar) =>
+const updateUserService = (
+  id,
+  name,
+  username,
+  email,
+  password,
+  avatar,
+  background
+) =>
   User.findOneAndUpdate(
     {
       _id: id,
@@ -19,6 +27,7 @@ const updateUserService = (id, name, username, email, password, avatar) =>
       email,
       password,
       avatar,
+      background,
     },
     {
       rawResult: true,

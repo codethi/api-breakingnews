@@ -38,7 +38,7 @@ const createUserController = async (req, res) => {
       username,
       email,
       avatar,
-      background
+      background,
     },
     token,
   });
