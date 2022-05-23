@@ -81,7 +81,7 @@ const updateUserController = async (req, res) => {
 
     if (!name && !username && !email && !password && !avatar) {
       res.status(400).send({
-        message: "Submit at least one field to update the post",
+        message: "Submit at least one field to update the user",
       });
     }
 
