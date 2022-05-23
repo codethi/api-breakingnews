@@ -3,9 +3,9 @@ const authService = require("../services/auth.service");
 const bcrypt = require("bcryptjs");
 
 const createUserController = async (req, res) => {
-  const { name, username, email, password, avatar } = req.body;
+  const { name, username, email, password, avatar, background } = req.body;
 
-  if (!username || !name || !email || !password || !avatar) {
+  if (!username || !name || !email || !password || !avatar || !background) {
     return res.status(400).send({
       message: "Submit all fields for registration",
     });
@@ -38,6 +38,7 @@ const createUserController = async (req, res) => {
       username,
       email,
       avatar,
+      background
     },
     token,
   });
@@ -76,8 +77,14 @@ const findUserByIdController = async (req, res) => {
 
 const updateUserController = async (req, res) => {
   try {
-    let { name, username, email, password, avatar } = req.body;
+    let { name, username, email, password, avatar, background } = req.body;
     const { id } = req.params;
+
+    if (!name && !username && !email && !password && !avatar && !background) {
+      res.status(400).send({
+        message: "Submit at least one field to update the user",
+      });
+    }
 
     const user = await userService.findByIdUserService(id);
 
@@ -97,7 +104,8 @@ const updateUserController = async (req, res) => {
       username,
       email,
       password,
-      avatar
+      avatar,
+      background
     );
 
     return res.send({ message: "User successfully updated!" });
