@@ -79,12 +79,6 @@ const updateUserController = async (req, res) => {
     let { name, username, email, password, avatar } = req.body;
     const { id } = req.params;
 
-    if (!name && !username && !email && !password && !avatar) {
-      res.status(400).send({
-        message: "Submit at least one field to update the user",
-      });
-    }
-
     const user = await userService.findByIdUserService(id);
 
     if (user._id != req.userId) {
