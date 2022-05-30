@@ -234,7 +234,8 @@ const likePostController = async (req, res) => {
   const postLiked = await postService.likesService(id, userId);
 
   if (postLiked.lastErrorObject.n === 0) {
-    return res.status(400).send({ message: "You already liked this post" });
+    await postService.likesDeleteService(id, userId);
+    return res.status(200).send({ message: "Like successfully removed" });
   }
 
   return res.send({

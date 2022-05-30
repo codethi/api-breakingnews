@@ -60,6 +60,20 @@ const likesService = (id, userId) =>
     }
   );
 
+const likesDeleteService = (id, userId) =>
+  Post.findOneAndUpdate(
+    {
+      _id: id,
+    },
+    {
+      $pull: {
+        likes: {
+          userId: userId,
+        },
+      },
+    }
+  );
+
 const commetsService = (id, message, userId) =>
   Post.findOneAndUpdate(
     {
@@ -85,6 +99,7 @@ module.exports = {
   updatePostService,
   deletePostService,
   likesService,
+  likesDeleteService,
   commetsService,
   countPosts,
 };
