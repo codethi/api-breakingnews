@@ -45,4 +45,11 @@ router.patch(
   postController.commentPostController
 );
 
+router.patch(
+  "/:id/:idComment/comment",
+  validId,
+  authMiddleware,
+  postController.commentDeletePostController
+);
+
 module.exports = router;

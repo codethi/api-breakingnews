@@ -75,7 +75,7 @@ const findAllPostsController = async (req, res) => {
         title: post.title,
         banner: post.banner,
         text: post.text,
-        likes: post.likes.length,
+        likes: post.likes,
         comments: post.comments,
         name: post.user.name,
         username: post.user.username,
@@ -98,7 +98,7 @@ const topNewsController = async (req, res) => {
       title: post.title,
       banner: post.banner,
       text: post.text,
-      likes: post.likes.length,
+      likes: post.likes,
       comments: post.comments,
       name: post.user.name,
       username: post.user.username,
@@ -124,7 +124,7 @@ const searchPostController = async (req, res) => {
       title: post.title,
       banner: post.banner,
       text: post.text,
-      likes: post.likes.length,
+      likes: post.likes,
       comments: post.comments,
       name: post.user.name,
       username: post.user.username,
@@ -144,7 +144,7 @@ const findPostByIdController = async (req, res) => {
       title: post.title,
       banner: post.banner,
       text: post.text,
-      likes: post.likes.length,
+      likes: post.likes,
       comments: post.comments,
       name: post.user.name,
       username: post.user.username,
@@ -167,7 +167,7 @@ const findPostsByUserIdController = async (req, res) => {
         title: post.title,
         banner: post.banner,
         text: post.text,
-        likes: post.likes.length,
+        likes: post.likes,
         comments: post.comments,
         name: post.user.name,
         username: post.user.username,
@@ -233,6 +233,8 @@ const likePostController = async (req, res) => {
 
   const postLiked = await postService.likesService(id, userId);
 
+  console.log(postLiked);
+
   if (postLiked.lastErrorObject.n === 0) {
     await postService.likesDeleteService(id, userId);
     return res.status(200).send({ message: "Like successfully removed" });
@@ -252,11 +254,20 @@ const commentPostController = async (req, res) => {
     return res.status(400).send({ message: "Write a message to comment" });
   }
 
-  await postService.commetsService(id, message, userId);
+  await postService.commentsService(id, message, userId);
 
   return res.send({
     message: "Comment successfully completed!",
   });
+};
+
+const commentDeletePostController = async (req, res) => {
+  const { id, idComment } = req.params;
+  const userId = req.userId;
+
+  await postService.commentsDeleteService(id, userId, idComment);
+
+  return res.send({ message: "Comment successfully removed" });
 };
 
 module.exports = {
@@ -270,4 +281,5 @@ module.exports = {
   deletePostController,
   likePostController,
   commentPostController,
+  commentDeletePostController
 };

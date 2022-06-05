@@ -1,4 +1,5 @@
 const Post = require("../models/Post");
+const mongoose = require("mongoose");
 
 const createPostService = (title, banner, text, userId) =>
   Post.create({ title, banner, text, user: userId });
@@ -74,18 +75,35 @@ const likesDeleteService = (id, userId) =>
     }
   );
 
-const commetsService = (id, message, userId) =>
-  Post.findOneAndUpdate(
+const commentsService = (id, message, userId) => {
+  let idComment = Math.floor(Date.now() * Math.random()).toString(36);
+  return Post.findOneAndUpdate(
     {
       _id: id,
     },
     {
       $push: {
-        comments: { userId, message, createdAt: new Date() },
+        comments: { idComment, userId, message, createdAt: new Date() },
       },
     },
     {
       rawResult: true,
+    }
+  );
+};
+
+const commentsDeleteService = (id, userId, idComment) =>
+  Post.findOneAndUpdate(
+    {
+      _id: id,
+    },
+    {
+      $pull: {
+        comments: {
+          idComment: idComment,
+          userId: userId,
+        },
+      },
     }
   );
 
@@ -100,6 +118,7 @@ module.exports = {
   deletePostService,
   likesService,
   likesDeleteService,
-  commetsService,
+  commentsService,
+  commentsDeleteService,
   countPosts,
 };
