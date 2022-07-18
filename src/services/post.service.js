@@ -1,5 +1,4 @@
 const Post = require("../models/Post");
-const mongoose = require("mongoose");
 
 const createPostService = (title, banner, text, userId) =>
   Post.create({ title, banner, text, user: userId });
