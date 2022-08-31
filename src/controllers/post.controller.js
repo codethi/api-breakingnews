@@ -89,6 +89,7 @@ const findAllPostsController = async (req, res) => {
 
 const topNewsController = async (req, res) => {
   const post = await postService.topNewsService();
+  
   if (!post) {
     return res.status(400).send({ message: "There is no registered post" });
   }
