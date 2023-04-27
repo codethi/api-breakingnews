@@ -57,9 +57,9 @@ const findAllPostsController = async (req, res) => {
         ? `${currentUrl}?limit=${limit}&offset=${previous}`
         : null;
 
-    if (posts.length === 0) {
+    /* if (posts.length === 0) {
       return res.status(400).send({ message: "There are no posts" });
-    }
+    } */
 
     posts.shift(); // remove primeiro elemento da lista
 
