@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const validId = (req, res, next) => {
+function validId(req, res, next) {
   let idParam;
   if (!req.params.id) {
     req.params.id = req.userId;
@@ -13,6 +13,6 @@ const validId = (req, res, next) => {
     return res.status(400).send({ message: "Invalid id!" });
   }
   next();
-};
+}
 
-module.exports = { validId };
+export default { validId };
