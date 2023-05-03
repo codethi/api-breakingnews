@@ -1,55 +1,28 @@
-const router = require("express").Router();
+import postController from "../controllers/post.controller.js";
+import authMiddleware from "../middlewares/auth.middleware.js";
+import { validId } from "../middlewares/global.middleware.js";
 
-const postController = require("../controllers/post.controller");
-const authMiddleware = require("../middlewares/auth.middleware");
-const { validId } = require("../middlewares/global.middleware");
+import { Router } from "express";
 
-router.post("/create", authMiddleware, postController.createPostController);
-router.get("/", postController.findAllPostsController);
-router.get("/top", postController.topNewsController);
-router.get("/search", postController.searchPostController);
-router.get(
-  "/byIdPost/:id",
-  validId,
-  authMiddleware,
-  postController.findPostByIdController
-);
-router.get(
-  "/byUserId",
-  authMiddleware,
-  validId,
-  postController.findPostsByUserIdController
-);
-router.patch(
-  "/update/:id",
-  validId,
-  authMiddleware,
-  postController.updatePostController
-);
-router.delete(
-  "/delete/:id",
-  validId,
-  authMiddleware,
-  postController.deletePostController
-);
-router.patch(
-  "/:id/like",
-  validId,
-  authMiddleware,
-  postController.likePostController
-);
-router.patch(
-  "/:id/comment",
-  validId,
-  authMiddleware,
-  postController.commentPostController
-);
+const postRouter = Router();
 
-router.patch(
+postRouter.get("/", postController.findAllPostsController);
+postRouter.get("/top", postController.topNewsController);
+postRouter.get("/search", postController.searchPostController);
+
+postRouter.use(authMiddleware);
+postRouter.post("/create", postController.createPostController);
+
+postRouter.use(validId);
+postRouter.get("/byIdPost/:id", postController.findPostByIdController);
+postRouter.get("/byUserId", postController.findPostsByUserIdController);
+postRouter.patch("/update/:id", postController.updatePostController);
+postRouter.delete("/delete/:id", postController.deletePostController);
+postRouter.patch("/:id/like", postController.likePostController);
+postRouter.patch("/:id/comment", postController.commentPostController);
+postRouter.patch(
   "/:id/:idComment/comment",
-  validId,
-  authMiddleware,
   postController.commentDeletePostController
 );
 
-module.exports = router;
+export default postRouter;
