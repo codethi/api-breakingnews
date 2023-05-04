@@ -1,6 +1,6 @@
-import authService from "../services/auth.service";
-import bcrypt from "bcryptjs";
-import userRepositories from "../repositories/user.repositories";
+import authService from "../services/auth.service.js";
+import bcrypt from "bcrypt";
+import userRepositories from "../repositories/user.repositories.js";
 
 async function createUserService({
   name,

@@ -1,4 +1,4 @@
-import Post from "../models/Post";
+import Post from "../models/Post.js";
 
 function createPostRepository(title, banner, text, userId) {
   return Post.create({ title, banner, text, user: userId });

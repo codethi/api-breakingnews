@@ -1,4 +1,4 @@
-import postRepositories from "../services/post.repositories.js";
+import postRepositories from "../repositories/post.repositories.js";
 
 async function createPostService({ title, banner, text }, userId) {
   if (!title || !banner || !text)

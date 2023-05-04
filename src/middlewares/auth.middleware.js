@@ -1,6 +1,6 @@
 import "dotenv/config";
 import jwt from "jsonwebtoken";
-import { findByIdUserService } from "../services/user.service";
+import userService from "../services/user.service.js";
 
 function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -19,7 +19,7 @@ function authMiddleware(req, res, next) {
   jwt.verify(token, process.env.SECRET, async (err, decoded) => {
     if (err) return res.status(401).send({ message: "Invalid token!" });
 
-    const user = await findByIdUserService(decoded.id);
+    const user = await userService.findByIdUserService(decoded.id);
     if (!user || !user.id)
       return res.status(401).send({ message: "Invalid token!" });
 

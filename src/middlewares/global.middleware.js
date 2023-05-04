@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-function validId(req, res, next) {
+export function validId(req, res, next) {
   let idParam;
   if (!req.params.id) {
     req.params.id = req.userId;
@@ -15,4 +15,3 @@ function validId(req, res, next) {
   next();
 }
 
-export default { validId };
