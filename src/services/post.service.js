@@ -29,7 +29,7 @@ async function findAllPostsService(limit, offset, currentUrl) {
     offset = 0;
   }
 
-  const posts = await postRepositories.findAllPostsSRepository(offset, limit);
+  const posts = await postRepositories.findAllPostsRepository(offset, limit);
 
   const total = await postRepositories.countPosts();
 
