@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import "dotenv/config";
 
 function generateToken(id) {
   return jwt.sign({ id: id }, process.env.SECRET, { expiresIn: 86400 });
