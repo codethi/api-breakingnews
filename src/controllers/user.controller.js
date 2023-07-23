@@ -4,7 +4,7 @@ async function createUserController(req, res) {
   const { name, username, email, password, avatar, background } = req.body;
 
   try {
-    const user = await userService.createUserController({
+    const user = await userService.createUserService({
       name,
       username,
       email,
