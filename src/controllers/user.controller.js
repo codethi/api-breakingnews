@@ -4,7 +4,7 @@ async function createUserController(req, res) {
   const { name, username, email, password, avatar, background } = req.body;
 
   try {
-    const user = await userService.createUserService({
+    const token = await userService.createUserService({
       name,
       username,
       email,
@@ -12,7 +12,7 @@ async function createUserController(req, res) {
       avatar,
       background,
     });
-    res.status(201).send(user);
+    res.status(201).send(token);
   } catch (e) {
     return res.status(400).send(e.message);
   }
