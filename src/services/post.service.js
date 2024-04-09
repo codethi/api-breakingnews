@@ -155,7 +155,7 @@ async function updatePostService(id, title, banner, text, userId) {
 }
 
 async function deletePostService(id, userId) {
-  const post = await postService.findPostByIdService(id);
+  const post = await postRepositories.findPostByIdService(id);
 
   if (!post) throw new Error("Post not found");
 
