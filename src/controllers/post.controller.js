@@ -95,7 +95,7 @@ async function deletePostController(req, res) {
     await postService.deletePostService(id, userId);
     return res.send({ message: "Post deleted successfully" });
   } catch (err) {
-    return res.status(500).send(e.message);
+    return res.status(500).send(err.message);
   }
 }
 
